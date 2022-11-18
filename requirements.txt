@@ -1,0 +1,4 @@
+pyyaml==6.0
+biopython==1.79
+intarna==3.3.1
+pandas==1.5.1

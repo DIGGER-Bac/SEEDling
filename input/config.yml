@@ -1,0 +1,28 @@
+# Path to GenBank target genome
+subject_path: "input/e_coli_k12_mg1655.gb"
+# Path to GenBank files of genes for which the SEED will be calculated
+target_path: "input/e_coli_k12_mg1655.gb"
+# Path to output file, .csv
+output_path: "input/test.csv"
+# Number of SEED predictions per gene
+select_top: 10
+# Offset (left of the start codon)
+start_offset: 25
+# Offset (right of the start codon)
+end_offset: 20
+# Step size (for sliding window)
+step_size: 1
+# Length of the SEED region
+seq_length: 16
+# Prefix (Scaffold)
+srna_prefix: ""
+# Suffix (Scaffold)
+srna_suffix: "GATGTCCCCATTTTGTGGAGCCCATCAACCCCGCCATTTCGGTTCAAGGTTGATGGGTTTTTTGTT"
+# Scaffold+SEED which should be used as a template for the prediction
+srna_template: "GCCACTGCTTTTCTTTGATGTCCCCATTTTGTGGAGCCCATCAACCCCGCCATTTCGGTTCAAGGTTGATGGGTTTTTTGTT"
+# FASTA file of sites that should be excluded in the final scaffold+SEED
+exclude_sequences_path: "input/exclude.fasta"
+# Newline seperated txt file of gene names which should be included (whitelist)
+include_genes_path:  "input/include.txt"
+# E-value for BLASTn offtarget checks
+blast_evalue: 0.04
