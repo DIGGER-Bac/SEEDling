@@ -27,7 +27,7 @@ The tool was tested running Ubuntu 22.04.1 LTS with the following installations:
 ## Docker
 Due to the number of dependencies, it is recommended to run the pipeline via the Docker image we've created. While docker can be run from the command line interface, we recommend installing the [Docker Desktop](https://www.docker.com/products/docker-desktop/) app.
 If you're new to Docker follow the quick start guide that can be found [here](https://docs.docker.com/desktop/get-started/).
-The SEEDling Docker image can be downloaded from [here](https://example.com). To load the image please follow the instructions from the official [Docker documentation](https://docs.docker.com/engine/reference/commandline/load/).
+The SEEDling Docker image can be downloaded from [here](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs). To load the image please follow the instructions from the official [Docker documentation](https://docs.docker.com/engine/reference/commandline/load/).
 
 ### Creating the Docker Container
 When creating the container, it is important to set the following optional settings:   
