@@ -1,13 +1,15 @@
 # SEEDling 
 ## Description
-SEEDling predicts the best possible synthetic sRNA sequence for the target(s) of choice. In order to do so it requires the following user inputs: 
-1.  an annotated target genbank file (single gene to
+SEEDling predicts the best possible synthetic sRNA sequence for the desired target(s). In order to do this, it requires the following user input:
+1.  Annotated target GenBank file (single gene to
 whole genome)
-2.  a wild-type sRNA and its corresponding scaffold
-3.  the reference genome of the target organism and 
-4.  a config file    
+2.  Wild-type sRNA and its corresponding scaffold
+3.  Reference genome of the target organism and 
+4.  Config file (see below)    
 
-Based on the input files, SEEDling predicts the best antisense regions and uses [BLASTn](https://pubmed.ncbi.nlm.nih.gov/20003500/) on the  whole target genome to identify possible off-targets (using the E-value threshold specified by the user). Afterwards, it combines the SEED region with the provided sRNA prefix/suffix to determine the binding energy via [intaRNA](https://pubmed.ncbi.nlm.nih.gov/28472523/). Finally [RNApdist](https://pubmed.ncbi.nlm.nih.gov/22115189/) is used to compare the synthetic sRNAs with the wild-type sRNA template scaffold to check for  folding alterations, allowing to exclude synthetic sRNAs with drastic structural changes.
+
+Based on these inputs, SEEDling iterates over the range of target regions to find the best candidate SEED regions. This is done by combining the specified sRNA prefix/suffix sequences with the respective SEED sequence to form an sRNA scaffold of which the binding energy is determined using [intaRNA](https://pubmed.ncbi.nlm.nih.gov/28472523/). To exclude possible drastic structural changes, the pipeline checks the fold change between the synthetic sRNA scaffolds and the specified wild-type sRNA scaffold using [RNApdist](https://pubmed.ncbi.nlm.nih.gov/22115189/). Both binding energy and distance to wild-type are combined into an comprehensive internal score, on which potential synthetic sRNAs are ranked. To ensure that predicted sRNAs are compatible with possible downstream applications, this ranking is first checked and filtered for illegal sequences such as TypeIIs recognition sites (`exclude_sequence_path` in the config.yml). Subsequently, the ranking is checked for possible off-target effects. For this purpose, SEEDling compares the synthetic sRNAs with the whole target genome via [BLASTn](https://pubmed.ncbi.nlm.nih.gov/20003500/), where the user can determine the threshold via the E-Value parameter. 
+
 
 ## Requirements
 The tool was tested on Ubuntu 22.04.1 LTS with the following installations:   
@@ -70,7 +72,7 @@ The following parameters must be set in the configuration [YAML](https://yaml.or
 | seq_length | integer | 16 | Length of antisense sequence |
 | seq_prefix | string | GCTA | Prefix (scaffold) |
 | seq_suffix | string | ATCG | Suffix (scaffold) |
-| srna_template | string | GCCACTGCTTTTCTTTGATGTCCCCATTTTG | Template scaffold used by RNApdist |
+| srna_template | string | GCCACTGCTTTTCTTTGATGTCCCCATTTTG | Template scaffold used for RNApdist |
 | exclude_sequences_path | string | input/exclude_sites.fasta | Path to FASTA file that contains sequences to exclude (i.e. restriction recognition sites) |
 | include_genes_path | string | input/filter_short.txt | Path to *.txt file of gene names that should be chosen (If left empty all genes will be chosen)| 
 | blast_evalue | float | 0.04 | E-value for BLASTn offtarget checks (on target genome) |
