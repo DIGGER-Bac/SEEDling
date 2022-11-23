@@ -7,11 +7,10 @@ whole genome)
 3.  the reference genome of the target organism and 
 4.  a config file    
 
-Based on the input files SEEDling predicts the best antisense regions, uses [BLASTn](https://pubmed.ncbi.nlm.nih.gov/20003500/) to determine off-target effects by the expect value (E-value). Afterwards, it combines the seed region with the provided sRNA scaffold to
-determine the binding energy via [intaRNA](https://pubmed.ncbi.nlm.nih.gov/28472523/) and finally applies [RNApdist](https://pubmed.ncbi.nlm.nih.gov/22115189/) to compare synthetic sRNAs and wild-type sRNA in regard of potential folding alterations, allowing to exclude synthetic sRNAs with drastic structural changes.
+Based on the input files, SEEDling predicts the best antisense regions and uses [BLASTn](https://pubmed.ncbi.nlm.nih.gov/20003500/) on the  whole target genome to identify possible off-targets (using the E-value threshold specified by the user). Afterwards, it combines the SEED region with the provided sRNA prefix/suffix to determine the binding energy via [intaRNA](https://pubmed.ncbi.nlm.nih.gov/28472523/). Finally [RNApdist](https://pubmed.ncbi.nlm.nih.gov/22115189/) is used to compare the synthetic sRNAs with the wild-type sRNA template scaffold to check for  folding alterations, allowing to exclude synthetic sRNAs with drastic structural changes.
 
 ## Requirements
-The tool was tested running Ubuntu 22.04.1 LTS with the following installations:   
+The tool was tested on Ubuntu 22.04.1 LTS with the following installations:   
 - [Python 3.9.13](https://www.python.org/downloads/release/python-3913/)   
 - [conda 4.13.0](https://github.com/conda/conda/releases/tag/4.13.0)    
 - [IntaRNA 3.3.1 ](https://github.com/BackofenLab/IntaRNA/releases/tag/v3.3.1)    
@@ -25,7 +24,7 @@ The tool was tested running Ubuntu 22.04.1 LTS with the following installations:
 
 ## Usage
 ## Docker
-Due to the number of dependencies, it is recommended to run the pipeline via the Docker image we've created. While docker can be run from the command line interface, we recommend installing the [Docker Desktop](https://www.docker.com/products/docker-desktop/) app.
+Due to the number of dependencies, it is recommended to run the pipeline via the Docker Image we've created. While Docker can be run from the command line interface, we recommend installing the [Docker Desktop](https://www.docker.com/products/docker-desktop/) app.
 If you're new to Docker follow the quick start guide that can be found [here](https://docs.docker.com/desktop/get-started/).
 The SEEDling Docker image can be downloaded from [**here**](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs). To load the image please follow the instructions from the official [Docker documentation](https://docs.docker.com/engine/reference/commandline/load/).
 
@@ -71,10 +70,10 @@ The following parameters must be set in the configuration [YAML](https://yaml.or
 | seq_length | integer | 16 | Length of antisense sequence |
 | seq_prefix | string | GCTA | Prefix (scaffold) |
 | seq_suffix | string | ATCG | Suffix (scaffold) |
-| srna_template | string | GCCACTGCTTTTCTTTGATGTCCCCATTTTG | Template scaffold |
+| srna_template | string | GCCACTGCTTTTCTTTGATGTCCCCATTTTG | Template scaffold used by RNApdist |
 | exclude_sequences_path | string | input/exclude_sites.fasta | Path to FASTA file that contains sequences to exclude (i.e. restriction recognition sites) |
 | include_genes_path | string | input/filter_short.txt | Path to *.txt file of gene names that should be chosen (If left empty all genes will be chosen)| 
-| blast_evalue | float | 0.04 | E-value for BLASTn offtarget checks |
+| blast_evalue | float | 0.04 | E-value for BLASTn offtarget checks (on target genome) |
 
 ### Output
 Following output file be written to the specified output *.csv file.    

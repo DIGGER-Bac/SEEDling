@@ -1,4 +1,4 @@
-# Path to GenBank target genome
+# Path to GenBank target genome (used in off-target detection)
 subject_path: "input/e_coli_k12_mg1655.gb"
 # Path to GenBank files of genes for which the SEED will be calculated
 target_path: "input/e_coli_k12_mg1655.gb"
@@ -18,7 +18,7 @@ seq_length: 16
 srna_prefix: ""
 # Suffix (Scaffold)
 srna_suffix: "GATGTCCCCATTTTGTGGAGCCCATCAACCCCGCCATTTCGGTTCAAGGTTGATGGGTTTTTTGTT"
-# Scaffold+SEED which should be used as a template for the prediction
+# Scaffold+SEED which should be used as a reference for RNApdist
 srna_template: "GCCACTGCTTTTCTTTGATGTCCCCATTTTGTGGAGCCCATCAACCCCGCCATTTCGGTTCAAGGTTGATGGGTTTTTTGTT"
 # FASTA file of sites that should be excluded in the final scaffold+SEED
 exclude_sequences_path: "input/exclude.fasta"
