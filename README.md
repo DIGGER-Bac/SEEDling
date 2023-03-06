@@ -97,6 +97,8 @@ Following output file be written to the specified output *.csv file.
 | Fold | ..(((.....))).... | Secondary structure of the scaffold + seed |
 | FullSeq | AACAGCCTGGCTCATCATACGTGCCGCATCAC | Prefix + seed + suffix sequence |
 
+## License
+This is a repository written under the [CC BY-NC 4.0 license](http://creativecommons.org/licenses/by-nc/4.0/)
 
 
 ## References
