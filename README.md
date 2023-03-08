@@ -23,33 +23,58 @@ The tool was tested on Ubuntu 22.04.1 LTS with the following installations:
 - [pandas 1.5.1](https://pandas.pydata.org/)
 
 
+## Converting GenBank
+SEEDling relies on GenBank files to function properly. If you have a fasta sequence and a gff annotation file, you can still use SEEDling by converting these files into GenBank format.
+One way to accomplish this is by utilizing [EMBOSS seqret](https://www.bioinformatics.nl/cgi-bin/emboss/help/seqret) using the following command.
+
+```
+seqret -sequence example_fasta.fasta -feature -fformat gff -fopenfile example_gff.gff -osformat genbank -auto
+```
+Alternatively, sequence editors like [Benchling](https://www.benchling.com/) and [Geneious Prime](https://www.geneious.com/features/) can be used.
 
 ## Usage
 ## Docker
-Due to the number of dependencies, it is recommended to run the pipeline via the Docker Image we've created. While Docker can be run from the command line interface, we recommend installing the [Docker Desktop](https://www.docker.com/products/docker-desktop/) app.
-If you're new to Docker follow the quick start guide that can be found [here](https://docs.docker.com/desktop/get-started/).
-The SEEDling Docker image can be downloaded from [**here**](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs). To load the image please follow the instructions from the official [Docker documentation](https://docs.docker.com/engine/reference/commandline/load/).
+Due to the number of dependencies, it is recommended to run the pipeline via the Docker Image we've created. 
+The SEEDling Docker image can be downloaded from [OwnCloud](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs) or [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling). 
+### Running SEEDling
+This image was build and tested on Docker version 20.10.23, build 7155243 and Docker Desktop 4.17.0.
 
-### Creating the Docker Container
-When creating the container, it is important to set the following optional settings:   
+**OwnCloud**   
+Download SEEDling from [OwnCloud](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs) and load it via the following command
+```
+docker load -i SEEDling.tar
+```
+To run the image, use the following command:
 
-**Volumes:**
-> **Host path**: File path to an empty folder on your host machine.
+```
+docker run -it \
+--mount type=bind,source=homepath,target=/home/DIGGER/SEEDling/input \
+seedling:version1.1
+```
+Make sure to change the `homepath` to the corresponding folder on the host machine.
 
-> **Container path**: /home/DIGGER/SEEDling/input
+**DockerHub**   
+Alternatively, the image can be pulled from [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling) using the following command.
+``` 
+docker pull cedkb/digger_bac-seedling
+```
+The image can then be exectued using the following command
+```
+docker run -it \
+--mount type=bind,source=homepath,target=/home/DIGGER/SEEDling/input \
+cedkb/digger_bac-seedling
+```
 
-Providing these settings will allow you to interact with the container by parsing files into the host folder. 
+### Using SEEDling
 
-### Running SEEDling in Docker
-1. Start and connect to the container.
-2. Switch the shell from `sh` to `bash` by entering and executing the `bash` command.
-3. Navigate to the script directory by executing 
-```cd home/DIGGER/SEEDling```
-4. Download the example *input* files from GitHub and place the files into the *host path* directory.
-5. Change the files as needed (Note: Make sure to change all paths in the config.yml to include "input/" as a prefix)
-6. Execute SEEDling by running
-```python3 SEEDling.py -c input/config.yml```
-7. SEEDling now executes and generates an output file as defined in the *config.yml*
+Change the files in the `input` folder as needed and set SEEDlings parameters in the corresponding config.yml. Note: Make sure that all *paths* in the config.yml include "input/" as a prefix. 
+
+Execute SEEDling by running   
+> python3 SEEDling.py -c input/config.yml
+
+SEEDling now executes and generates an output file as defined in the *config.yml*
+
+
 
 ## Running SEEDling without Docker
 Before running SEEDling, install all dependencies that are listed in the *requirement* section. Make sure to add *ViennaRNA*, *IntaRNA* and *BLAST* to your *PATH*-variable. Change the configuration file to the the parameters of your choice. 
