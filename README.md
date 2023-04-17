@@ -35,26 +35,12 @@ Alternatively, sequence editors like [Benchling](https://www.benchling.com/) and
 ## Usage
 ## Docker
 Due to the number of dependencies, it is recommended to run the pipeline via the Docker Image we've created. 
-The SEEDling Docker image can be downloaded from [OwnCloud](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs) or [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling). 
+The SEEDling Docker image can be downloaded from [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling). 
 ### Running SEEDling
 This image was build and tested on Docker version 20.10.23, build 7155243 and Docker Desktop 4.17.0.
 
-**OwnCloud**   
-Download SEEDling from [OwnCloud](https://owncloud.gwdg.de/index.php/s/7tKXsNXfq9OdQzs) and load it via the following command
-```
-docker load -i SEEDling.tar
-```
-To run the image, use the following command:
-
-```
-docker run -it \
---mount type=bind,source=homepath,target=/home/DIGGER/SEEDling/input \
-seedling:version1.1
-```
-Make sure to change the `homepath` to the corresponding folder on the host machine.
-
 **DockerHub**   
-Alternatively, the image can be pulled from [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling) using the following command.
+Pull the image from [DockerHub](https://hub.docker.com/r/cedkb/digger_bac-seedling) using the following command.
 ``` 
 docker pull cedkb/digger_bac-seedling
 ```
@@ -68,8 +54,7 @@ cedkb/digger_bac-seedling
 ### Using SEEDling
 
 Change the files in the `input` folder as needed and set SEEDlings parameters in the corresponding config.yml. Note: Make sure that all *paths* in the config.yml include "input/" as a prefix. 
-
-Execute SEEDling by running   
+To run SEEDling after entering the interactive docker session, execute the following command: 
 > python3 SEEDling.py -c input/config.yml
 
 SEEDling now executes and generates an output file as defined in the *config.yml*
