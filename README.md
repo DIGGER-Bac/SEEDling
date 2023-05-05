@@ -110,6 +110,17 @@ Following output file be written to the specified output *.csv file.
 ## License
 This is a repository written under the [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
+## How to Cite:
+DIGGER-BAC is published and can be cited as following:
+
+Philipp N, Brinkmann C, Georg J, Schindler D, Berghoff BA (2023) DIGGER-Bac: prediction of seed regions for high-fidelity construction of synthetic small RNAs in bacteria. Bioinformatics. https://doi.org/10.1093/bioinformatics/btad285
+
+## Application
+SEEDling has been applied within the following publications and preprints:
+
+Brueck M, Berghoff BA, Schindler D (2023) In silico design, in vitro construction and in vivo application of synthetic small regulatory RNAs in bacteria. arXiv.
+https://doi.org/10.48550/arXiv.2304.14932
+
 
 ## References
 Martin Mann, Patrick R. Wright, Rolf Backofen, IntaRNA 2.0: enhanced and customizable prediction of RNA–RNA interactions, Nucleic Acids Research, Volume 45, Issue W1, 3 July 2017, Pages W435–W439, https://doi.org/10.1093/nar/gkx279   
